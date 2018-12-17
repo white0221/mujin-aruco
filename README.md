@@ -8,7 +8,7 @@ Docker
 # 使い方
 1. このリポジトリをローカルに落とす  
 ``` .sourceCode .shell
-$ git clone https://github.com/white0221/mujin-face.git
+$ git clone https://github.com/white0221/mujin-aruco.git
 ```  
 
 2. イメージのビルド
