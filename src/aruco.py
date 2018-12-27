@@ -4,9 +4,15 @@ import cv2
 aruco = cv2.aruco
 
 class ArUco(object):
-    def __init__(self):
-        # 4x4の0-1000のIDを生成可能
-        self.aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_1000)
+    def __init__(self, size=4, num_creation=1000):
+        aruco_dict_name = 'DICT_{}X{}_{}'.format(size, size, num_creation)
+        aruco_dict_id = None
+        try:
+            aruco_dict_id = getattr(aruco, aruco_dict_name)
+        except:
+            Exception('invalid aruco dict')
+
+        self.aruco_dict = aruco.getPredefinedDictionary(aruco_dict_id)
 
     def generating(self, _id, side_pixel=64):
         return aruco.drawMarker(self.aruco_dict, _id, side_pixel)
