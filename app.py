@@ -11,7 +11,7 @@ app = Flask(__name__)
 cam = Camera(CAMERA_PORT)
 arc = ArUco()
 
-@app.route('/')
+@app.route('/items')
 def main():
     img = cam.capturing()
     _, ids, _ = arc.detecting(img)
