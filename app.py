@@ -1,7 +1,7 @@
 import cv2
 import base64
 
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from src import Camera, ArUco, ndarray_ids_to_list
 
 
@@ -16,12 +16,15 @@ def main():
     img = cam.capturing()
     _, ids, _ = arc.detecting(img)
 
-    response = None
+    response = {'ids': None, 'error': None}
     if ids == None:
-        response = 'cannot detecting aruco marker'
+        response['error'] = 'cannot detect aruco marker'
     else:
         ids = ndarray_ids_to_list(ids)
-        response = ' '.join([str(id_) for id_ in ids])
+        response['ids'] = ids
+
+    response = make_response(jsonify(response))
+    response.mimetype = 'application/json'
     return response
 
 if __name__ == '__main__':
