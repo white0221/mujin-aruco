@@ -18,6 +18,7 @@ def main():
 
     response = {'ids': None, 'error': None}
     if ids is None:
+        response['ids'] = []
         response['error'] = 'cannot detect aruco marker'
     else:
         ids = ndarray_ids_to_list(ids)
